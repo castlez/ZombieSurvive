@@ -5,15 +5,15 @@
 
 #include "dungeon.h"
 
-
 dungeon::dungeon(){
 //for now just adds 4 rooms randomly together
   int added = 0; //counter for amount of rooms added
-  int dir = 0; //direction to add room(n=0, s=1, w=2, e=3)
+  int dir; //direction to add room(n=0, s=1, w=2, e=3)
   entrance = new room;
   room * here = entrance;
-  while(added<4){
-    dir = rand()%4;
+  while(added<4){     //TODO variable ammount of rooms
+    dir = rand() % 4;
+    cout << "dir is "<<dir;
     //if the direction is null, add a room there and increment added,
     //if its not move into that direction
 
@@ -26,36 +26,41 @@ dungeon::dungeon(){
       else{
         here = here->n;
       }
+      continue;
     }
     //south
     if(dir == 1){
       if(!here->s){
-        here->n=new room;
+        here->s=new room;
         added++;
       }
       else{
         here = here->s;
       }
+      continue;
     }
     //west
     if(dir == 2){
       if(!here->w){
-        here->n=new room;
+        here->w=new room;
         added++;
       }
       else{
         here = here->w;
       }
+      continue;
     }
+
     //east
     if(dir == 3){
       if(!here->e){
-        here->n=new room;
+        here->e=new room;
         added++;
       }
       else{
         here = here->e;
       }
+      continue;
     }
   }
 
@@ -69,40 +74,7 @@ void dungeon::display(){
 }
 //TODO temporarily iterative for testing purposes
 void dungeon::disp(room * cur, room * prev){
-  
  
-  cout<<endl<<"n"<<endl;
-  while(cur){
-    cur->area->display();
-    cur=cur->n;
-    cout<<endl<<endl;
-  }
-  cout<<endl<<"s"<<endl;
-  cur = entrance;
-
-  while(cur){
-    cur->area->display();
-    cur=cur->s;
-    cout<<endl<<endl;
-  } 
-  cout<<endl<<"e"<<endl;
-  cur = entrance;
-
-  while(cur){
-    cur->area->display();
-    cur=cur->e;
-    cout<<endl<<endl;
-  }
-  cout<<endl<<"w"<<endl;
-  cur = entrance;
-
-  while(cur){
-    cur->area->display();
-    cur=cur->w;
-    cout<<endl<<endl;
-  }
-  
-  
   /*
   if(!cur) return;
   
